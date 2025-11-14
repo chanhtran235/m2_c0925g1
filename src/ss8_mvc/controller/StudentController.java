@@ -1,17 +1,16 @@
-package ss5.student_management;
+package ss8_mvc.controller;
 
 import ss8_mvc.entity.Student;
+import ss8_mvc.service.IStudentService;
 import ss8_mvc.service.StudentService;
+import ss8_mvc.view.StudentView;
 
 import java.util.Scanner;
 
-public class Run {
-    public static void main(String[] args) {
-           displayMenu();
-    }
+public class StudentController {
 
     public static void displayMenu() {
-        StudentService studentService = new StudentService();
+        IStudentService studentService = new StudentService();
         final int DISPLAY = 1;
         final int ADD = 2;
         final int DELETE = 3;
@@ -22,31 +21,17 @@ public class Run {
                     "\n 1.Danh sách" +
                     "\n 2.Thêm" +
                     "\n 3.Xoa" +
-                    "\n 4.Kết thúc chương trình");
+                    "\n 4.Quay lại menu chính");
             System.out.println("------ Chọn chức năng-------------");
             int choose = Integer.parseInt(scanner.nextLine());
             switch (choose) {
                 case DISPLAY:
                     // CHỨC NĂNG HIỂN THỊ
-                    System.out.println("Danh sách");
                     Student[] studentList = studentService.findAll();
-                    for (int i = 0; i < studentList.length ; i++) {
-                        if (studentList[i]!=null){
-                            System.out.println(i+1 + "." + studentList[i]);
-                        }else {
-                            break;
-                        }
-                    }
+                    StudentView.displayStudentList(studentList);
                     break;
                 case ADD:
-                    System.out.println("---Thêm mới---");
-                    System.out.println("-Nhập id");
-                    int id = Integer.parseInt(scanner.nextLine());
-                    System.out.println("-Nhập tên");
-                    String name = scanner.nextLine();
-                    System.out.println("-Nhập địa chỉ");
-                    String address= scanner.nextLine();
-                    Student student = new Student(id,name,address);
+                    Student student = StudentView.inputDataForStudent();
                     studentService.add(student);
                     break;
                 case DELETE:
