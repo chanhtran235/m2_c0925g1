@@ -7,4 +7,8 @@ public class Instructor extends Employee {
         System.out.println(this.getName()+ "dạy môn :"+ subject);
     }
 
+    @Override
+    public String getInfoToCSV() {
+        return "";
+    }
 }

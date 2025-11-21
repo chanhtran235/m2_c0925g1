@@ -2,18 +2,15 @@ package ss8_mvc.view;
 
 import ss8_mvc.entity.Student;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class StudentView {
     private static Scanner scanner = new Scanner(System.in);
-    public static void displayStudentList(Student[] studentList){
+    public static void displayStudentList(List<Student> studentList){
         System.out.println("------------Danh sách--------");
-        for (int i = 0; i < studentList.length ; i++) {
-            if (studentList[i]!=null){
-                System.out.println(i+1 + "." + studentList[i]);
-            }else {
-                break;
-            }
+        for (int i = 0; i < studentList.size() ; i++) {
+            System.out.println(studentList.get(i));
         }
     }
     public static Student inputDataForStudent(){
@@ -24,7 +21,13 @@ public class StudentView {
         String name = scanner.nextLine();
         System.out.println("-Nhập địa chỉ");
         String address= scanner.nextLine();
-        Student student = new Student(id,name,address);
+        System.out.println("-Nhập tên lớp ");
+        String className= scanner.nextLine();
+        Student student = new Student(id,name,address,className);
         return student;
+    }
+    public static int inputId(String mess){
+        System.out.println(mess);
+        return Integer.parseInt(scanner.nextLine());
     }
 }

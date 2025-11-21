@@ -38,7 +38,7 @@ public abstract class Person {
     public void setAddress(String address) {
         this.address = address;
     }
-
+    public abstract String getInfoToCSV();
     @Override
     public String toString() {
         return  "id=" + getId() +

@@ -41,7 +41,11 @@ public class Student extends Person {
         Student student = (Student)obj;
         return this.getId()==student.getId();
     }
-
+    //   int id, String name, String address,String className
+    @Override
+    public String getInfoToCSV() {
+        return this.getId()+","+this.getName()+","+this.getAddress()+","+this.getClassName();
+    }
     @Override
     public String toString() {
         return "Student{" +

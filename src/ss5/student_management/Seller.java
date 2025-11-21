@@ -7,4 +7,9 @@ public class Seller extends Employee implements IGame{
     public void playerGame() {
 
     }
+
+    @Override
+    public String getInfoToCSV() {
+        return "";
+    }
 }
