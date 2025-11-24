@@ -1,6 +1,8 @@
 package ss8_mvc.entity;
 
-public abstract class Person {
+import java.io.Serializable;
+
+public abstract class Person implements Serializable {
     private int id;
     private String name;
     private String address;

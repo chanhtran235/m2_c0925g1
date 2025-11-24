@@ -1,5 +1,7 @@
 package ss8_mvc.util;
 
+import ss8_mvc.entity.Student;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,5 +33,34 @@ public class ReadAndWriteFile {
             System.out.println("lỗi đọc file");
         }
         return stringList;
+    }
+
+    public static void writeStudentListToBinaryFile(String filePath, List<Student> studentList){
+        File file = new File(filePath);
+        try( FileOutputStream fileOutputStream = new FileOutputStream(file);
+             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)
+        ){
+            objectOutputStream.writeObject(studentList);
+
+        }catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+    public static List<Student> readBinaryFile(String filePath){
+        List<Student> studentList = new ArrayList<>();
+        File file = new File(filePath);
+        try (FileInputStream fileInputStream = new FileInputStream(file);
+             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);) {
+
+             studentList = (List<Student>) objectInputStream.readObject();
+        } catch (IOException e) {
+            System.out.println("danh sách đang trống");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return studentList;
     }
 }

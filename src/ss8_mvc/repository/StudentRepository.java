@@ -13,13 +13,14 @@ public class StudentRepository implements IStudentRepository {
     @Override
     public List<Student> findAll() {
         List<Student> studentList = new ArrayList<>();
-        List<String> stringList = ReadAndWriteFile.readFileCSVToStringList(STUTDEN_FILE);
-        String[] array = null;
-        for (int i = 0; i <stringList.size() ; i++) {
-           array = stringList.get(i).split(",");
-           Student student = new Student(Integer.parseInt(array[0]),array[1],array[2],array[3]);
-           studentList.add(student);
-        }
+//        List<String> stringList = ReadAndWriteFile.readFileCSVToStringList(STUTDEN_FILE);
+//        String[] array = null;
+//        for (int i = 0; i <stringList.size() ; i++) {
+//           array = stringList.get(i).split(",");
+//           Student student = new Student(Integer.parseInt(array[0]),array[1],array[2],array[3]);
+//           studentList.add(student);
+//        }
+        studentList = ReadAndWriteFile.readBinaryFile("src/ss8_mvc/data/student.dat");
         return studentList;
     }
 
@@ -27,9 +28,14 @@ public class StudentRepository implements IStudentRepository {
     @Override
     public void add(Student student) {
         // ghi file/ lưu vào DB
-        List<String> stringList = new ArrayList<>();
-        stringList.add(student.getInfoToCSV());
-        ReadAndWriteFile.write(STUTDEN_FILE,stringList,true);
+//        List<String> stringList = new ArrayList<>();
+//        stringList.add(student.getInfoToCSV());
+//        ReadAndWriteFile.write(STUTDEN_FILE,stringList,true);
+
+        // su dung file binary
+        List<Student> studentList = ReadAndWriteFile.readBinaryFile("src/ss8_mvc/data/student.dat");
+        studentList.add(student);
+        ReadAndWriteFile.writeStudentListToBinaryFile("src/ss8_mvc/data/student.dat",studentList);
     }
 
     @Override
